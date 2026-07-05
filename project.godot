@@ -1,0 +1,26 @@
+; Engine configuration file.
+; Dibuat untuk Godot 4.3+
+
+config_version=5
+
+[application]
+
+config/name="FINAL SCENE"
+run/main_scene="res://scenes/SplashScreen.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/handheld/orientation="portrait"
+window/stretch/mode="canvas_items"
+
+[rendering]
+
+renderer/rendering_method="mobile"
