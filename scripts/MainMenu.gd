@@ -10,6 +10,8 @@ func _ready() -> void:
 
 	var vsize := get_viewport_rect().size
 
+	_setup_creepy_atmosphere(vsize)
+
 	var dev := Label.new()
 	dev.text = "A LeoDev Production"
 	dev.add_theme_font_size_override("font_size", 14)
@@ -85,6 +87,81 @@ func _ready() -> void:
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD
 	hint.position = Vector2(30, vsize.y - 80)
 	add_child(hint)
+
+func _setup_creepy_atmosphere(vsize: Vector2) -> void:
+	var silhouette := Polygon2D.new()
+	silhouette.color = Color(0.0, 0.0, 0.0, 0.0)
+	var head_r := 22.0
+	var body_w := 46.0
+	var body_h := 130.0
+	silhouette.polygon = PackedVector2Array([
+		Vector2(-body_w/2, 0), Vector2(body_w/2, 0),
+		Vector2(body_w/2 - 6, body_h * 0.55), Vector2(body_w/2 + 4, body_h),
+		Vector2(-body_w/2 - 4, body_h), Vector2(-body_w/2 + 6, body_h * 0.55)
+	])
+	add_child(silhouette)
+
+	var head := Polygon2D.new()
+	head.color = Color(0.0, 0.0, 0.0, 0.0)
+	var pts := PackedVector2Array()
+	for i in range(16):
+		var angle = i * TAU / 16
+		pts.append(Vector2(cos(angle), sin(angle)) * head_r)
+	head.polygon = pts
+	head.position = Vector2(0, -head_r * 0.9)
+	silhouette.add_child(head)
+
+	silhouette.position = Vector2(vsize.x * 0.82, vsize.y * 0.55)
+	_loop_silhouette_flicker(silhouette, head)
+
+	var flicker := ColorRect.new()
+	flicker.color = Color(0, 0, 0, 0.0)
+	flicker.set_anchors_preset(Control.PRESET_FULL_RECT)
+	flicker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(flicker)
+	_loop_light_flicker(flicker)
+
+	for i in range(14):
+		var dot := ColorRect.new()
+		var size := randf_range(2.0, 4.0)
+		dot.size = Vector2(size, size)
+		dot.color = Color(0.6, 0.55, 0.5, randf_range(0.1, 0.3))
+		dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		dot.position = Vector2(randf_range(0, vsize.x), randf_range(0, vsize.y))
+		add_child(dot)
+		_loop_dust_drift(dot, vsize)
+
+func _loop_silhouette_flicker(silhouette: Polygon2D, head: Polygon2D) -> void:
+	while is_instance_valid(silhouette):
+		await get_tree().create_timer(randf_range(6.0, 12.0)).timeout
+		if not is_instance_valid(silhouette):
+			return
+		var tw := create_tween()
+		var target_alpha := randf_range(0.08, 0.18)
+		tw.tween_property(silhouette, "color:a", target_alpha, 0.4)
+		tw.parallel().tween_property(head, "color:a", target_alpha, 0.4)
+		tw.tween_interval(randf_range(0.5, 1.5))
+		tw.tween_property(silhouette, "color:a", 0.0, 0.6)
+		tw.parallel().tween_property(head, "color:a", 0.0, 0.6)
+		await tw.finished
+
+func _loop_light_flicker(flicker: ColorRect) -> void:
+	while is_instance_valid(flicker):
+		await get_tree().create_timer(randf_range(4.0, 9.0)).timeout
+		if not is_instance_valid(flicker):
+			return
+		var tw := create_tween()
+		for i in range(randi_range(2, 4)):
+			tw.tween_property(flicker, "color:a", randf_range(0.15, 0.3), 0.05)
+			tw.tween_property(flicker, "color:a", 0.0, 0.08)
+		await tw.finished
+
+func _loop_dust_drift(dot: ColorRect, vsize: Vector2) -> void:
+	while is_instance_valid(dot):
+		var target := Vector2(randf_range(0, vsize.x), randf_range(0, vsize.y))
+		var tw := create_tween()
+		tw.tween_property(dot, "position", target, randf_range(8.0, 16.0))
+		await tw.finished
 
 func _style_button(btn: Button) -> void:
 	var sb := StyleBoxFlat.new()
