@@ -1,5 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#0a0a0c"/>
-  <circle cx="64" cy="64" r="50" fill="none" stroke="#b81818" stroke-width="6"/>
-  <text x="64" y="78" font-family="Georgia, serif" font-size="42" fill="#e0c060" text-anchor="middle">13</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#200606"/>
+      <stop offset="55%" stop-color="#0d0202"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="eyeWhite" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#f5e8e0"/>
+      <stop offset="70%" stop-color="#d8b8ac"/>
+      <stop offset="100%" stop-color="#a86858"/>
+    </radialGradient>
+    <radialGradient id="iris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff3020"/>
+      <stop offset="55%" stop-color="#8a0000"/>
+      <stop offset="100%" stop-color="#1a0000"/>
+    </radialGradient>
+    <linearGradient id="bloodDrip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8a0000"/>
+      <stop offset="100%" stop-color="#3a0000"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bgGrad)"/>
+
+  <g stroke="#7a0000" stroke-width="2" opacity="0.75" fill="none">
+    <path d="M 120 200 Q 160 220 190 235"/>
+    <path d="M 100 260 Q 150 260 185 258"/>
+    <path d="M 130 320 Q 165 300 195 280"/>
+    <path d="M 390 200 Q 350 220 320 235"/>
+    <path d="M 410 260 Q 360 260 325 258"/>
+    <path d="M 380 320 Q 345 300 315 280"/>
+  </g>
+
+  <path d="M 90 256 Q 256 150 422 256 Q 256 362 90 256 Z" fill="url(#eyeWhite)" stroke="#4a1010" stroke-width="4"/>
+
+  <circle cx="256" cy="256" r="78" fill="url(#iris)"/>
+  <circle cx="256" cy="256" r="78" fill="none" stroke="#3a0000" stroke-width="3"/>
+
+  <ellipse cx="256" cy="256" rx="26" ry="34" fill="#050000"/>
+  <circle cx="240" cy="238" r="10" fill="#ff9090" opacity="0.7"/>
+
+  <g stroke="#c01010" stroke-width="2.5" opacity="0.8" fill="none">
+    <path d="M 110 250 Q 160 245 178 252"/>
+    <path d="M 115 268 Q 165 270 182 264"/>
+    <path d="M 402 248 Q 352 244 334 252"/>
+    <path d="M 398 270 Q 350 272 330 264"/>
+    <path d="M 200 175 Q 220 200 232 220"/>
+    <path d="M 312 175 Q 292 200 280 220"/>
+  </g>
+
+  <path d="M 95 258 Q 88 280 92 305 Q 96 320 88 335 Q 84 345 92 350 Q 100 345 96 330 Q 104 315 98 300 Q 94 280 100 262 Z" fill="url(#bloodDrip)"/>
+  <path d="M 420 260 Q 428 285 422 310 Q 418 325 426 340 Q 430 350 422 355 Q 414 350 418 335 Q 410 320 416 305 Q 422 285 415 265 Z" fill="url(#bloodDrip)"/>
+  <circle cx="90" cy="365" r="5" fill="#6a0000"/>
+  <circle cx="424" cy="370" r="4" fill="#6a0000"/>
+
+  <text x="256" y="445" font-family="Georgia, serif" font-size="46" font-weight="bold" fill="#c01818" text-anchor="middle" stroke="#000000" stroke-width="1.5">FINAL SCENE</text>
+  <text x="256" y="470" font-family="Georgia, serif" font-size="16" fill="#7a4040" text-anchor="middle" letter-spacing="3">A HOLLYWOOD HORROR</text>
 </svg>
