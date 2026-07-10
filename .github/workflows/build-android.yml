@@ -21,6 +21,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Generate debug keystore
         run: |
           keytool -keyalg RSA -genkeypair -alias androiddebugkey \
